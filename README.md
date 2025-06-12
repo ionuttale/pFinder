@@ -28,4 +28,3 @@ Pfinder is a Spring Boot web application for pet adoption and matching, featurin
 - Notifications for matches and messages
 
 ---
-Replace this README with more details as you develop the project.
