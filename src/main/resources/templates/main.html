@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pfinder - Main</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <style>
+        body {
+            background: linear-gradient(120deg, #f5f5dc 0%, #ffb347 100%);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+        }
+        .main-container {
+            max-width: 600px;
+            margin: 60px auto;
+            background: #fff8ee;
+            border-radius: 18px;
+            box-shadow: 0 4px 32px #0002;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+        .pet-paw {
+            width: 60px;
+            display: block;
+            margin: 0 auto 10px auto;
+        }
+        .title {
+            text-align: center;
+            font-size: 2.4em;
+            font-weight: bold;
+            color: #ff9800;
+            margin-bottom: 6px;
+            letter-spacing: 2px;
+        }
+        h1 {
+            color: #bfa76a;
+            margin-bottom: 30px;
+        }
+        .main-links a {
+            display: inline-block;
+            margin: 16px 24px;
+            color: #ff9800;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: color 0.2s;
+            border-bottom: 2px solid transparent;
+        }
+        .main-links a:hover {
+            color: #bfa76a;
+            border-bottom: 2px solid #bfa76a;
+        }
+        .pet-quote {
+            text-align: center;
+            color: #bfa76a;
+            font-style: italic;
+            margin-bottom: 18px;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <img class="pet-paw" src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Paw Print" />
+        <div class="title">Pfinder</div>
+        <div class="pet-quote">Connecting pets with loving families!</div>
+        <h1>Welcome to Pfinder!</h1>
+        <div class="main-links">
+            <a th:href="@{/account}">Account</a>
+            <a th:href="@{/add_pets}">Add Pets</a>
+            <a th:href="@{/swipe}">Swipe Pets</a>
+            <a th:href="@{/notifications}">Notifications</a>
+            <form th:action="@{/logout}" method="post" style="display:inline;">
+                <button type="submit" style="background:none;border:none;color:#ff9800;font-size:1.2em;font-weight:bold;cursor:pointer;padding:0;margin:16px 24px;">Logout</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

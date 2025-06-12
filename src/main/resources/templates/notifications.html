@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pfinder - Notifications</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            background: linear-gradient(120deg, #f5f5dc 0%, #ffb347 100%);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 60px auto;
+            background: #fff8ee;
+            border-radius: 18px;
+            box-shadow: 0 4px 32px #0002;
+            padding: 40px 32px 32px 32px;
+            position: relative;
+        }
+        .pet-paw {
+            width: 60px;
+            display: block;
+            margin: 0 auto 10px auto;
+        }
+        .title {
+            text-align: center;
+            font-size: 2.4em;
+            font-weight: bold;
+            color: #ff9800;
+            margin-bottom: 6px;
+            letter-spacing: 2px;
+        }
+        h2 {
+            color: #bfa76a;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .notification {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #ffb34744;
+            padding: 16px;
+            margin-bottom: 18px;
+            color: #333;
+        }
+        .main-link {
+            text-align: center;
+            margin-top: 18px;
+        }
+        .main-link a {
+            color: #ff9800;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .main-link a:hover {
+            text-decoration: underline;
+        }
+        .chat-link {
+            margin-left: 10px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .chat-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img class="pet-paw" src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Paw Print" />
+        <div class="title">Pfinder</div>
+        <h2>Notifications</h2>
+        <div th:if="${matches != null and !matches.isEmpty()}">
+            <h3>Matches</h3>
+            <div th:each="match,iter : ${matches}" class="notification">
+                <span th:text="${match}"></span>
+                <a th:href="@{'/chat/' + ${matchUsernames[iter.index]}}" class="chat-link">Chat</a>
+            </div>
+        </div>
+        <div th:if="${matches == null or matches.isEmpty()}">
+            <div class="notification">No matches yet.</div>
+        </div>
+        <div th:if="${notifications != null and !notifications.isEmpty()}">
+            <h3>Likes</h3>
+            <div th:each="note : ${notifications}" class="notification" th:text="${note}"></div>
+        </div>
+        <div th:if="${notifications == null or notifications.isEmpty()}">
+            <div class="notification">No notifications yet.</div>
+        </div>
+        <div class="main-link">
+            <a th:href="@{/main}">Back to Main</a>
+        </div>
+    </div>
+</body>
+</html>

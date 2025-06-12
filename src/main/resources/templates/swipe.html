@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pfinder - Swipe Pets</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            background: linear-gradient(120deg, #f5f5dc 0%, #ffb347 100%);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 60px auto;
+            background: #fff8ee;
+            border-radius: 18px;
+            box-shadow: 0 4px 32px #0002;
+            padding: 40px 32px 32px 32px;
+            position: relative;
+        }
+        .pet-paw {
+            width: 60px;
+            display: block;
+            margin: 0 auto 10px auto;
+        }
+        .title {
+            text-align: center;
+            font-size: 2.4em;
+            font-weight: bold;
+            color: #ff9800;
+            margin-bottom: 6px;
+            letter-spacing: 2px;
+        }
+        h2 {
+            color: #bfa76a;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .pet-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px #ffb34744;
+            padding: 18px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .pet-photo {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 12px;
+            border: 3px solid #ffb347;
+        }
+        .pet-name {
+            font-size: 1.3em;
+            color: #ff9800;
+            font-weight: bold;
+        }
+        .pet-desc {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .swipe-btns button {
+            background: #ff9800;
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-size: 1em;
+            margin: 0 10px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .swipe-btns button:hover {
+            background: #bfa76a;
+        }
+        .main-link {
+            text-align: center;
+            margin-top: 18px;
+        }
+        .main-link a {
+            color: #ff9800;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .main-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img class="pet-paw" src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Paw Print" />
+        <div class="title">Pfinder</div>
+        <h2>Swipe Pets</h2>
+        <div th:if="${pets != null and !pets.isEmpty()}">
+            <div th:each="pet,iterStat : ${pets}" th:if="${iterStat.index == 0}">
+                <img class="pet-photo" th:src="@{'/pets/photo/' + ${pet.photos[0].id}}" alt="Pet Photo" th:if="${pet.photos != null and !pet.photos.isEmpty()}" />
+                <div class="pet-name" th:text="${pet.name}"></div>
+                <div class="pet-desc">
+                    <span th:text="${pet.age}"></span> years old, <span th:text="${pet.breed}"></span>.<br/>
+                    <span th:text="${pet.description}"></span>
+                </div>
+                <div class="pet-desc">
+                    <b>Gender:</b> <span th:text="${pet.gender}"></span> | <b>Color:</b> <span th:text="${pet.color}"></span><br/>
+                    <b>Favorite Toy:</b> <span th:text="${pet.fav_toy}"></span> | <b>Favorite Activity:</b> <span th:text="${pet.fav_activity}"></span><br/>
+                    <b>Favorite Treat:</b> <span th:text="${pet.fav_treat}"></span> | <b>Personality:</b> <span th:text="${pet.personality_traits}"></span><br/>
+                    <b>Size:</b> <span th:text="${pet.size}"></span> | <b>Vaccinated:</b> <span th:text="${pet.vaccination_status} ? 'Yes' : 'No'" ></span> | <b>Weight:</b> <span th:text="${pet.weight}"></span> kg
+                </div>
+                <form th:action="@{/swipe}" method="post" class="swipe-btns">
+                    <input type="hidden" name="petId" th:value="${pet.id}" />
+                    <button type="submit" name="direction" value="RIGHT">&#10084; Like</button>
+                    <button type="submit" name="direction" value="LEFT">&#10060; Skip</button>
+                </form>
+            </div>
+        </div>
+        <div th:if="${pets == null or pets.isEmpty()}">
+            <h2>No more pets to swipe!</h2>
+            <div class="main-link">
+                <a th:href="@{/main}">Back to Main</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

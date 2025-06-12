@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pfinder - Add Pet</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            background: linear-gradient(120deg, #f5f5dc 0%, #ffb347 100%);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 60px auto;
+            background: #fff8ee;
+            border-radius: 18px;
+            box-shadow: 0 4px 32px #0002;
+            padding: 40px 32px 32px 32px;
+            position: relative;
+        }
+        .pet-paw {
+            width: 60px;
+            display: block;
+            margin: 0 auto 10px auto;
+        }
+        .title {
+            text-align: center;
+            font-size: 2.4em;
+            font-weight: bold;
+            color: #ff9800;
+            margin-bottom: 6px;
+            letter-spacing: 2px;
+        }
+        h2 {
+            color: #bfa76a;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        input[type="text"], input[type="number"], textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 18px;
+            border: 1px solid #e0d6c3;
+            border-radius: 8px;
+            background: #f9f6f1;
+            font-size: 1em;
+        }
+        button {
+            width: 100%;
+            background: linear-gradient(90deg, #ff9800 0%, #ffb347 100%);
+            color: #fff;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+            box-shadow: 0 2px 8px #ffb34744;
+        }
+        button:hover {
+            background: linear-gradient(90deg, #ffb347 0%, #ff9800 100%);
+        }
+        .main-link {
+            text-align: center;
+            margin-top: 18px;
+        }
+        .main-link a {
+            color: #ff9800;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .main-link a:hover {
+            text-decoration: underline;
+        }
+        .styled-select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 18px;
+            border: 1px solid #e0d6c3;
+            border-radius: 8px;
+            background: #f9f6f1;
+            font-size: 1em;
+            color: #333;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+        .styled-file {
+            width: 100%;
+            padding: 10px 0 10px 0;
+            margin-bottom: 18px;
+            background: #f9f6f1;
+            border-radius: 8px;
+            border: 1px solid #e0d6c3;
+            font-size: 1em;
+            color: #333;
+        }
+        .styled-file::-webkit-file-upload-button {
+            background: linear-gradient(90deg, #ff9800 0%, #ffb347 100%);
+            color: #fff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+            box-shadow: 0 2px 8px #ffb34744;
+        }
+        .styled-file::-webkit-file-upload-button:hover {
+            background: linear-gradient(90deg, #ffb347 0%, #ff9800 100%);
+        }
+        /* For Firefox */
+        .styled-file::file-selector-button {
+            background: linear-gradient(90deg, #ff9800 0%, #ffb347 100%);
+            color: #fff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+            box-shadow: 0 2px 8px #ffb34744;
+        }
+        .styled-file::file-selector-button:hover {
+            background: linear-gradient(90deg, #ffb347 0%, #ff9800 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img class="pet-paw" src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Paw Print" />
+        <div class="title">Pfinder</div>
+        <h2>Add a Pet</h2>
+        <form th:action="@{/pets/add_pets}" method="post" enctype="multipart/form-data">
+            <label>Name</label>
+            <input type="text" name="name" required />
+            <label>Age</label>
+            <input type="number" name="age" min="0" required />
+            <label>Breed</label>
+            <input type="text" name="breed" required />
+            <label>Color</label>
+            <input type="text" name="color" required />
+            <label>Description</label>
+            <textarea name="description" rows="3" required></textarea>
+            <label>Favorite Toy</label>
+            <input type="text" name="fav_toy" required />
+            <label>Favorite Activity</label>
+            <input type="text" name="fav_activity" required />
+            <label>Favorite Treat</label>
+            <input type="text" name="fav_treat" required />
+            <label>Gender</label>
+            <select name="gender" required class="styled-select">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+            <label>Vaccination Status</label>
+            <select name="vaccination_status" required class="styled-select">
+                <option value="true">Vaccinated</option>
+                <option value="false">Not Vaccinated</option>
+            </select>
+            <label>Personality Traits</label>
+            <input type="text" name="personality_traits" required />
+            <label>Size</label>
+            <input type="text" name="size" required />
+            <label>Weight (kg)</label>
+            <input type="number" name="weight" min="0" step="0.1" required />
+            <label>Photo(s)</label>
+            <input type="file" name="photos" multiple required class="styled-file" />
+            <button type="submit">Add Pet</button>
+        </form>
+        <div class="main-link">
+            <a th:href="@{/main}">Back to Main</a>
+        </div>
+    </div>
+</body>
+</html>
